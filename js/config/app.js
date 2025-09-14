@@ -21,3 +21,12 @@ async function cargarSolicitudes() {
 }
 
 cargarSolicitudes();
+
+if ('serviceWorker' in navigator){
+    window.addEventListener('load',() => {
+        navigator.serviceWorker
+        .register('js/config/service-worker.js')
+        .then(reg => console.log("SW Registrado", reg))
+        .catch(err => console.log("Error registrado en SW, "),err);
+    });
+}
