@@ -1,7 +1,37 @@
-import { db } from "../firebase-config.js";
-import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { db, auth } from "../firebase-config.js";
+import { collection, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+
 
 const container = document.getElementById("solicitudes-container");
+
+document.addEventListener("DOMContentLoaded", () => {
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            try {
+                const uid = user.uid;
+                const userRef = doc(db, "usuarios", uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    mostrarUIUsuario(data.nombre);
+                } else {
+                    console.log("No existe el documento del usuario");
+                }
+            } catch (error) {
+                console.error("Error al obtener usuario:", error);
+            }
+        } else {
+            alert("Necesitas estar logueado.");
+        }
+    });
+});
+
+function mostrarUIUsuario(nombre)
+{
+    document.getElementById("username").textContent='¡Es un gusto verte acá, '+nombre+'!';
+}
 
 function cargarSolicitudes() {
     const solicitudesCol = collection(db, "solicitudes");
