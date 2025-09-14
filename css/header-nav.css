@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #09423f;
+    color: rgb(231, 231, 231);
+    text-align: center;
+    padding: 1rem 2rem;
+}
+
+#logo-header{
+    width: 3rem;
+}

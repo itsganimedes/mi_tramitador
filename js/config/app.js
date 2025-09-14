@@ -1,27 +1,34 @@
 import { db } from "../firebase-config.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 const container = document.getElementById("solicitudes-container");
 
-async function cargarSolicitudes() {
-    const querySnapshot = await getDocs(collection(db, "solicitudes"));
+function cargarSolicitudes() {
+    const solicitudesCol = collection(db, "solicitudes");
 
-    container.innerHTML = ""; // limpiar antes de renderizar
+    // Suscripción en tiempo real
+    onSnapshot(solicitudesCol, (querySnapshot) => {
+        container.innerHTML = ""; // limpiar antes de renderizar
 
-    querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const div = document.createElement("div");
-        div.classList.add("solicitud");
-        div.innerHTML = `
-        <h3>${data.nombre || "Sin nombre"}</h3>
-        <p><strong>Descripción:</strong> ${data.descripcion || "Sin descripción"}</p>
-        `;
-        container.appendChild(div);
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const div = document.createElement("div");
+            div.classList.add("solicitud");
+            div.innerHTML = `
+            <h3>${data.servicio || "Desconocido"}</h3>
+            <p>${data.nombre}</p>
+            <p><strong>Urgencia: </strong>${data.urgencia}</p>
+            <p><strong>Ubicación: </strong>${data.ubicacion}</p>
+            <p><strong>Horario: </strong>${data.hora}</p>
+            <p><strong>Descripción:</strong> ${data.comentario || "Sin descripción"}</p>
+            <button>Tomar</button>
+            `;
+            container.appendChild(div);
+        });
     });
 }
 
 cargarSolicitudes();
-
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
