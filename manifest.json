@@ -1,7 +1,7 @@
 {
     "name": "Tramitadores PWA",
     "short_name": "Tramitadores",
-    "start_url": "/index.html",
+    "start_url": "https://itsganimedes.github.io/mi_tramitador/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#09423f",
