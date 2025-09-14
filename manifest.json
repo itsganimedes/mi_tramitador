@@ -7,7 +7,7 @@
     "theme_color": "#09423f",
     "icons": [
         {
-        "src": "icon-192.png",
+        "src": "icons/t2logo.png",
         "sizes": "192x192",
         "type": "image/png"
         },
