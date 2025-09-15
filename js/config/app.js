@@ -58,7 +58,16 @@ function cargarSolicitudes() {
                         querySnapshot.forEach((doc) => {
                             const data = doc.data();
                             const div = document.createElement("div");
+
+                            if (!userSnap.data().servicio.includes(data.servicio)) {
+                                return;
+                            }
+                            else{
+                                alert("Si es tu servicio");
+                            }
+
                             div.classList.add("solicitud");
+                            div.classList.add(data.servicio);
                             div.innerHTML = `
                             <h3>${data.servicio || "Desconocido"}</h3>
                             <p>${data.nombre}</p>
@@ -73,7 +82,7 @@ function cargarSolicitudes() {
                     });
 
                 } else {
-                    console.log("No existe el documento del usuario");
+                    console.log("No existe el documento del usuario", user.uid);
                 }
             } catch (error) {
                 console.error("Error al obtener usuario:", error);
