@@ -19,3 +19,37 @@ header {
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+.login-button{
+    display: block;
+    width: fit-content;
+    margin: 1rem auto;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    background: rgb(143, 251, 255);
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    text-align: center;
+}
+
+.login-button:hover{
+    cursor: pointer;
+    background: rgb(83, 133, 134);
+}
+
+.signout-button{
+    display: block;
+    width: fit-content;
+    margin: 1rem auto;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    background: rgb(255, 147, 143);
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    text-align: center;
+}
+
+.signout-button:hover{
+    cursor: pointer;
+    background: rgb(134, 83, 83);
+}

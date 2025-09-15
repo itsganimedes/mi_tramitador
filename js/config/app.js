@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error al obtener usuario:", error);
             }
         } else {
-            alert("Necesitas estar logueado.");
+            document.querySelector(".signout-button").style.display = "none";
         }
     });
 });
@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function mostrarUIUsuario(nombre)
 {
     document.getElementById("username").textContent='¡Es un gusto verte acá, '+nombre+'!';
+    document.querySelector(".login-button").style.display = "none";
+    document.querySelector(".signout-button").style.display = "block";
 }
 
 function cargarSolicitudes() {
@@ -62,12 +64,8 @@ function cargarSolicitudes() {
                             if (!userSnap.data().servicio.includes(data.servicio)) {
                                 return;
                             }
-                            else{
-                                alert("Si es tu servicio");
-                            }
 
                             div.classList.add("solicitud");
-                            div.classList.add(data.servicio);
                             div.innerHTML = `
                             <h3>${data.servicio || "Desconocido"}</h3>
                             <p>${data.nombre}</p>
@@ -82,13 +80,13 @@ function cargarSolicitudes() {
                     });
 
                 } else {
-                    console.log("No existe el documento del usuario", user.uid);
+                    console.log("No existe el documento del Usuario");
                 }
             } catch (error) {
-                console.error("Error al obtener usuario:", error);
+                console.error("Error al obtener Usuario:", error);
             }
         } else {
-            alert("Necesitas estar logueado.");
+            
         }
     });
 }
