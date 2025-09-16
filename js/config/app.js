@@ -65,11 +65,21 @@ function cargarSolicitudes() {
                                 return;
                             }
 
+                            let urg = "Normal";
+
+                            if (data.urgencia === "emergencia"){
+                                urg = "Lo antes posible";
+                            } else if (data.urgencia === "urgente"){
+                                urg = "Para hoy"
+                            } else if (data.urgencia === "normal"){
+                                urg = "Mañana en adelante"
+                            }
+
                             div.classList.add("solicitud");
                             div.innerHTML = `
                             <h3>${data.servicio || "Desconocido"}</h3>
                             <p>${data.nombre}</p>
-                            <p><strong>Urgencia: </strong>${data.urgencia}</p>
+                            <p><strong>Urgencia: </strong>${urg}</p>
                             <p><strong>Ubicación: </strong>${data.ubicacion}</p>
                             <p><strong>Horario: </strong>${data.hora}</p>
                             <p><strong>Descripción:</strong> ${data.comentario || "Sin descripción"}</p>
