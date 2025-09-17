@@ -1,6 +1,6 @@
 {
-    "name": "Tramitadores PWA",
-    "short_name": "Tramitadores",
+    "name": "Mi Tramitados PWA",
+    "short_name": "Mi Tramitados",
     "start_url": "/mi_tramitador/",
     "scope": "/mi_tramitador/",
     "display": "standalone",
