@@ -1,5 +1,5 @@
 import { db, auth } from "../firebase-config.js";
-import { collection, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { collection, onSnapshot, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 
@@ -67,6 +67,11 @@ function cargarSolicitudes() {
 
                             let urg = "Normal";
 
+                            if (data.prioridad === 5)
+                            {
+                                return;
+                            }
+
                             if (data.urgencia === "emergencia"){
                                 urg = "Lo antes posible";
                             } else if (data.urgencia === "urgente"){
@@ -83,7 +88,7 @@ function cargarSolicitudes() {
                             <p><strong>Ubicación: </strong>${data.ubicacion}</p>
                             <p><strong>Horario: </strong>${data.hora}</p>
                             <p><strong>Descripción:</strong> ${data.comentario || "Sin descripción"}</p>
-                            <button>Tomar</button>
+                            <button onclick="cambiarEstado('${doc.id}',this)">Tomar</button>
                             `;
                             container.appendChild(div);
                         });
@@ -99,6 +104,67 @@ function cargarSolicitudes() {
             
         }
     });
+}
+
+window.cambiarEstado = async function (docId) {
+    const user = auth.currentUser;
+    if (!user) {
+        alert("No estás logueado.");
+        return;
+    }
+
+    const userDocRef = doc(db, "usuarios", user.uid);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (!userDocSnap.exists()) {
+        alert("Tu usuario no tiene permisos.");
+        return;
+    }
+
+    const userData = userDocSnap.data();
+    const rol = userData.rol;
+
+    if (rol === "user") {
+        alert("No tienes permiso para cambiar el estado de solicitudes.");
+        return;
+    }
+
+    try {
+        // Referencia a la solicitud
+        const solicitudRef = doc(db, "solicitudes", docId);
+
+        // Obtener el documento actual
+        const solicitudSnap = await getDoc(solicitudRef);
+        if (!solicitudSnap.exists()) {
+            alert("La solicitud no existe.");
+            return;
+        }
+
+        const data = solicitudSnap.data();
+
+        const nuevoEstado = 3;
+
+        let nuevaPrioridad = data.prioridad;
+        let updates = { realizado: nuevoEstado };
+        updates.tomado = userData.nombre;
+
+        if (data.prioridad == 5) {
+            alert("Esta solicitud ya está en proceso.");
+            return;
+        } else {
+            updates.prioridad = 5;
+            alert("Tomada exitosamente. Te contactaremos a la brevedad.");
+        }
+
+        await updateDoc(solicitudRef, updates);
+
+        console.log(`✅ Estado cambiado a ${nuevoEstado}, prioridad actualizada.`);
+
+    } catch (error) {
+        console.error("Error al cambiar estado:", error);
+        alert("Error al cambiar estado.");
+    }
+
 }
 
 cargarSolicitudes();
