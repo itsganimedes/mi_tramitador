@@ -160,6 +160,8 @@ window.cambiarEstado = async function (docId) {
 
         console.log(`✅ Estado cambiado a ${nuevoEstado}, prioridad actualizada.`);
 
+        cargarSolicitudes();
+
     } catch (error) {
         console.error("Error al cambiar estado:", error);
         alert("Error al cambiar estado.");
