@@ -83,11 +83,11 @@ function cargarSolicitudes() {
                             div.classList.add("solicitud");
                             div.innerHTML = `
                             <h3>${data.servicio || "Desconocido"}</h3>
-                            <p>${data.nombre}</p>
-                            <p><strong>Urgencia: </strong>${urg}</p>
-                            <p><strong>Ubicación: </strong>${data.ubicacion}</p>
-                            <p><strong>Horario: </strong>${data.hora}</p>
-                            <p><strong>Descripción:</strong> ${data.comentario || "Sin descripción"}</p>
+                            <p class="soli_username">${data.nombre}</p>
+                            <p><i class="fa-solid fa-bolt"></i><strong> Urgencia: </strong>${urg}</p>
+                            <p><i class="fa-solid fa-location-dot"></i><strong> Ubicación: </strong>${data.ubicacion}</p>
+                            <p><i class="fa-solid fa-clock"></i><strong> Horario: </strong>${data.hora}</p>
+                            <p class="comentario"><strong>Descripción:</strong> ${data.comentario || "Sin descripción"}</p>
                             <button onclick="cambiarEstado('${doc.id}',this)">Tomar</button>
                             `;
                             container.appendChild(div);
@@ -178,3 +178,15 @@ if ("serviceWorker" in navigator) {
         .catch(err => console.log("Error SW:", err));
     });
 }
+
+/* MENU HAMBURGUESA */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburgesa = document.querySelector(".hamburger");
+    const nav = document.querySelector("nav");
+
+    hamburgesa.addEventListener("click", function(e){
+        nav.classList.toggle("activo");
+        hamburgesa.classList.toggle("hactivo");
+    })
+})

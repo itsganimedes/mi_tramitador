@@ -7,12 +7,19 @@
 }
 
 .solicitud {
-    background: rgb(87, 159, 168);
+    background: rgb(240, 253, 255);
     box-shadow: 0 4px 6px rgb(0,0,0,0.8);
     padding: 1rem;
+    border: 1px solid #ccc;
     border-radius: 4px;
     width: 300px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    text-align: start;
+}
+
+.solicitud h3{
+    padding: 1rem 0;
+    border-bottom: 1px solid #ccc;
 }
 
 .solicitud:hover{
@@ -32,7 +39,6 @@
     width: calc(100% + 2rem);
     margin: 2rem -1rem -1rem -1rem;
     border: none;
-    border-radius: 4px;
     padding: 1rem 2rem;
     background: rgb(105, 206, 184);
     font-size: 1.5rem;
@@ -41,4 +47,18 @@
 .solicitud button:hover{
     cursor: pointer;
     background: rgb(87, 160, 145);
+}
+
+.soli_username{
+    color: rgb(129, 129, 129);
+    padding: 0.5rem 0;
+}
+
+.comentario {
+    color: rgb(110, 110, 110);
+    height: 3.5rem;  
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    white-space: normal;
 }

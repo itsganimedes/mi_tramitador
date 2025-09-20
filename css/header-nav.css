@@ -20,6 +20,8 @@ header {
     font-size: 1.2rem;
 }
 
+/* NAV */
+
 nav{
     background: #0f746e;
     padding: 2rem;
@@ -28,6 +30,11 @@ nav{
     align-items: center;
     justify-content: center;
     gap: 20px;
+    display: none;
+}
+
+nav.activo{
+    display: flex;
 }
 
 @media (max-width: 1050px)
@@ -36,6 +43,45 @@ nav{
         flex-direction: column;
     }
 }
+
+/* MENU HAMBURGUESA */
+
+.hamburger{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger:hover{
+    cursor: pointer;
+}
+
+.hamburger.hactivo .hline:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.hactivo .hline:nth-child(2){
+    opacity: 0;
+}
+
+.hamburger.hactivo .hline:nth-child(3){
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.hline{
+    width: 20px;
+    height: 2px;
+    background: #ccc;
+}
+
+@media (max-width: 1050px)
+{
+    nav{
+        flex-direction: column;
+    }
+}
+
+/* BOTONES LOGIN Y SIGN OUT */
 
 .login-button{
     padding: 0.4rem 1rem;
