@@ -110,3 +110,8 @@ nav.activo{
     cursor: pointer;
     background: rgb(134, 83, 83);
 }
+
+nav a{
+    text-decoration: none;
+    color: #ccc;
+}
