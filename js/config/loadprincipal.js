@@ -147,6 +147,7 @@ window.cambiarEstado = async function (docId) {
 
         let updates = { realizado: nuevoEstado };
         updates.tomado = userData.nombre;
+        updates.tramitadorID = user.uid;
 
         if (data.prioridad == 5) {
             alert("Esta solicitud ya está en proceso.");

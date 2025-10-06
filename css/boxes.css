@@ -3,6 +3,12 @@
     padding: 1rem 0 0 0;
 }
 
+.login_and_start{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #585858;
+}
+
 @media (max-width: 1050px){
     .inicio-info{
         margin: 0 -2rem;

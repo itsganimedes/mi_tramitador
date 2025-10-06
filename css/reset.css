@@ -20,6 +20,10 @@ body {
     color: #0b1817;
 }
 
+.oculto{
+    display: none;
+}
+
 @media (max-width: 1050px){
     .content{
         padding: 0 2rem;

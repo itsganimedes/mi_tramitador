@@ -37,7 +37,7 @@
 .solicitud button{
     display: block;
     width: calc(100% + 2rem);
-    margin: 2rem -1rem -1rem -1rem;
+    margin: 2rem -1rem -2rem -1rem;
     border: none;
     padding: 1rem 2rem;
     background: rgb(105, 206, 184);

@@ -94,6 +94,7 @@ function cargarSolicitudes() {
                                 <p><i class="fa-solid fa-location-dot"></i><strong> Ubicación: </strong>${data.ubicacion}</p>
                                 <p><i class="fa-solid fa-clock"></i><strong> Horario: </strong>${data.hora}</p>
                                 <p class="comentario"><strong>Descripción:</strong> ${data.comentario || "Sin descripción"}</p>
+                                <button onclick="">Fijar Precio</button>
                                 <button onclick="finalizar('${doc.id}',this)">Finalizar</button>
                                 `;
                             } else if (data.prioridad == 6)

@@ -22,12 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             document.querySelector(".signout-button").style.display = "none";
+            document.querySelector(".loading").style.display = "none";
+            document.querySelector(".login_and_start").style.display = "block";
         }
     });
 });
 
 function mostrarUIUsuario(nombre)
 {
+    document.querySelector(".login_and_start").style.display = "none";
     document.querySelector(".login-button").style.display = "none";
     document.querySelector(".signout-button").style.display = "block";
 }
