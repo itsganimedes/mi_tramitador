@@ -1,5 +1,5 @@
 import { db, auth } from "../firebase-config.js";
-import { collection, onSnapshot, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { collection, onSnapshot, doc, getDoc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 
@@ -36,7 +36,7 @@ function mostrarUIUsuario(nombre)
 }
 
 function cargarSolicitudes() {
-    const solicitudesCol = collection(db, "solicitudes");
+    const solicitudesCol = query(collection(db, "solicitudes"), orderBy("prioridad", "asc"));
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -77,7 +77,7 @@ function cargarSolicitudes() {
                             } else if (data.urgencia === "urgente"){
                                 urg = "Para hoy"
                             } else if (data.urgencia === "normal"){
-                                urg = "Mañana en adelante"
+                                urg = data.fechapedido;
                             }
 
                             div.classList.add("solicitud");
