@@ -1,5 +1,5 @@
 import { db, auth } from "../firebase-config.js";
-import { collection, onSnapshot, doc, getDoc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { collection, onSnapshot, doc, getDoc, updateDoc, orderBy, query, arrayRemove } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 let container = document.getElementById("solicitudes-container");
@@ -57,8 +57,7 @@ function cargarSolicitudes() {
 
                         querySnapshot.forEach((doc) => {
                             const data = doc.data();
-                            if (userData.solicitudTomada !== doc.id)
-                            {
+                            if (!userData.solicitudTomada.includes(doc.id)) {
                                 return;
                             }
 
@@ -131,7 +130,7 @@ cargarSolicitudes();
 //finalizar
 
 window.finalizar = async function (docId) {
-const user = auth.currentUser;
+    const user = auth.currentUser;
     if (!user) {
         alert("No estás logueado.");
         return;
@@ -149,31 +148,33 @@ const user = auth.currentUser;
     const rol = userData.rol;
 
     if (rol === "user") {
-        alert("No tienes permiso para tomar solicitudes.");
+        alert("No tienes permiso para finalizar solicitudes.");
         return;
     }
 
-    try{
+    try {
         const solicitudRef = doc(db, "solicitudes", docId);
-
-        // Obtener el documento actual
         const solicitudSnap = await getDoc(solicitudRef);
+
         if (!solicitudSnap.exists()) {
             alert("La solicitud no existe.");
             return;
         }
 
-        const data = solicitudSnap.data();
+        await updateDoc(solicitudRef, {
+            finalizadoTramitador: true,
+            prioridad: 6
+        });
 
-        let update = {finalizadoTramitador: true}
+        // await updateDoc(userDocRef, {
+        //     solicitudTomada: arrayRemove(docId)
+        // });
 
-        update.prioridad = 6;
+        alert("Solicitud finalizada exitosamente.");
+        console.log(`✅ Solicitud ${docId} finalizada y removida del usuario.`);
 
-        await updateDoc(solicitudRef, update);
-        alert("Finalizado exitosamente.");
+    } catch (err) {
+        console.error("Error al finalizar solicitud:", err);
+        alert("Ocurrió un error al finalizar la solicitud.");
     }
-    catch(err)
-    {
-        console.log("Error: ", err);
-    }
-}
+};

@@ -1,5 +1,5 @@
 import { db, auth } from "../firebase-config.js";
-import { collection, onSnapshot, doc, getDoc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { collection, onSnapshot, doc, getDoc, updateDoc, orderBy, query, arrayUnion  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 const container = document.getElementById("solicitudes-container");
@@ -145,7 +145,6 @@ window.cambiarEstado = async function (docId) {
 
         const nuevoEstado = 3;
 
-        let nuevaPrioridad = data.prioridad;
         let updates = { realizado: nuevoEstado };
         updates.tomado = userData.nombre;
 
@@ -158,8 +157,9 @@ window.cambiarEstado = async function (docId) {
 
         await updateDoc(solicitudRef, updates);
 
-        let update = { solicitudTomada: docId };
-        await updateDoc(userDocRef, update);
+        await updateDoc(userDocRef, {
+            solicitudTomada: arrayUnion(docId)
+        });
 
         alert("Tomada exitosamente. Te contactaremos a la brevedad.");
 
