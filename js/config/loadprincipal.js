@@ -87,8 +87,11 @@ function cargarSolicitudes() {
                             } else if (data.urgencia === "urgente"){
                                 urg = "Para hoy"
                             } else if (data.urgencia === "normal"){
-                                let fechaponer = data.fechapedido.toDate();
-                                urg = "Para el día " + fechaponer.toLocaleString();
+                                if (data.fechapedido != null)
+                                {
+                                    let fechaponer = data.fechapedido.toDate();
+                                    urg = "Para el día " + fechaponer.toLocaleString();
+                                }
                             }
 
                             div.classList.add("solicitud");
@@ -158,6 +161,11 @@ window.cambiarEstado = async function (docId) {
         }
 
         const data = solicitudSnap.data();
+
+        if (data.prioridad >= 5)
+        {
+            return;
+        }
 
         const nuevoEstado = 3;
 
