@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Trabajos - Mi Tramitados</title>
+    <title>Mis Estadísticas - Mi Tramitados</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header-nav.css">
     <link rel="stylesheet" href="css/applications.css">
@@ -33,20 +33,14 @@
             </nav>
 
         <div class="content">
+            
+            <p class="title">Mis Estadísticas</p>
 
-            <p class="title">Mis Trabajos</p>
-
-            <section id="solicitudes-container">
-
-                <div class="loading">
-                    <p>Cargando...</p>
-                </div>
-
-            </section>
+            <p class="loading">Cargando...</p>
 
             <p class="login_and_start oculto"><i class="fa-solid fa-face-laugh-beam"></i> ¡Inicia Sesión y comencemos!</p>
 
-
+            <p id="acobrar">$0</p>
 
         </div>
     </div>
@@ -55,7 +49,7 @@
             <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js" type="module"></script>
             <script src="js/firebase-config.js" type="module"></script>
             <script src="js/config/app.js" type="module"></script>
-            <script src="js/config/myjobs.js" type="module"></script>
+            <script src="js/config/stats.js" type="module"></script>
             <script src="js/config/signout.js" type="module"></script>
 </body>
 </html>
