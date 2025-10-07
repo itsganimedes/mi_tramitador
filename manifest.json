@@ -5,7 +5,7 @@
     "scope": "/mi_tramitador/",
     "display": "standalone",
     "background_color": "#83bebe",
-    "theme_color": "#09423f",
+    "theme_color": "#83bebe",
     "icons": [
         {
         "src": "/mi_tramitador/icons/t2logo.png",
