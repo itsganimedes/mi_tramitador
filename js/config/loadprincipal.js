@@ -48,10 +48,24 @@ function cargarSolicitudes() {
                         alert("No tienes permisos.")
                         return;
                     }
+
+                    const sonido=new Audio("../../sounds/nueva_solicitud.mp3");
+
+                    
+                    let primeraVez = true;
                     
                     // Suscripción en tiempo real
                     onSnapshot(solicitudesCol, (querySnapshot) => {
                         container.innerHTML = ""; // limpiar antes de renderizar
+
+                        if (!primeraVez) {
+                            querySnapshot.docChanges().forEach(change => {
+                                if (change.type === "added") {
+                                    const sonido = new Audio("../../sounds/nueva_solicitud.mp3");
+                                    sonido.play().catch(err => console.log("Autoplay bloqueado:", err));
+                                }
+                            });
+                        }
 
                         querySnapshot.forEach((doc) => {
                             const data = doc.data();
@@ -89,6 +103,8 @@ function cargarSolicitudes() {
                             `;
                             container.appendChild(div);
                         });
+
+                        primeraVez = false;
                     });
 
                 } else {
