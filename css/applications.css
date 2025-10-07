@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 3rem;
     padding: 1rem;
 }
 
@@ -11,8 +11,11 @@
 .solicitud {
     background: rgb(240, 253, 255);
     box-shadow: 0 4px 6px rgb(0,0,0,0.8);
-    padding: 1rem;
+    height: 22rem;
+    padding: 1rem 1rem 0 1rem;
     border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
     border-radius: 4px;
     width: 300px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -39,7 +42,7 @@
 .solicitud button{
     display: block;
     width: calc(100% + 2rem);
-    margin: 2rem -1rem -2rem -1rem;
+    margin: 0 -1rem;
     border: none;
     padding: 1rem 2rem;
     background: rgb(105, 206, 184);
