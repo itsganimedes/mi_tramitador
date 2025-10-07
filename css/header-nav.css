@@ -33,6 +33,11 @@ nav{
     display: none;
 }
 
+nav a{
+    text-decoration: none;
+    color: #f1f1f1;
+}
+
 nav.activo{
     display: flex;
 }
@@ -109,9 +114,4 @@ nav.activo{
 .signout-button:hover{
     cursor: pointer;
     background: rgb(134, 83, 83);
-}
-
-nav a{
-    text-decoration: none;
-    color: #ccc;
 }
