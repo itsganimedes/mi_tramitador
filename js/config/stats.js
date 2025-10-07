@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.querySelector(".loading").style.display = "none";
                     const data = userSnap.data();
                     let pcobrar = document.getElementById("acobrar");
-                    pcobrar.textContent = "$" + data.cobrar;
+                    let dinero = new Intl.NumberFormat('es-AR', {
+                    style: 'currency',
+                    currency: 'ARS',
+                    }).format(data.cobrar);
+                    pcobrar.textContent = dinero;
                 } else {
                     console.log("No existe el documento del usuario");
                 }
